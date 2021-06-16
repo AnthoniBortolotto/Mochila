@@ -59,6 +59,7 @@ int main()
 	if (valor(res) != 0 && peso(res) != 0) {
 		for (int i = 0; i < res.size(); i++)
 		{
+			//ignora o vazio
 			if (res[i]->valor != 0 && res[i]->peso != 0) {
 				cout << "-------------------------------------\n";
 				cout << "nome: " << res[i]->nome << endl;
@@ -145,16 +146,13 @@ vector<Item*> resolver(vector<Item*> itens, int maxCap) {
 	}
 	for (int i = 0; i < itens.size() + 1; i++) {
 		for (int cap = 0; cap < maxCap + 1; cap++) {
-			if (i == 0 || cap == 0) {
-				matriz[i][cap] = { new Item() };
-			}
-			else if (itens[i - 1]->peso <= cap && itens[i - 1]->valor + valor(matriz[i - 1][cap - itens[i - 1]->peso]) > valor(matriz[i - 1][cap])) {
+			if (i != 0 && cap != 0 && itens[i - 1]->peso <= cap && itens[i - 1]->valor + valor(matriz[i - 1][cap - itens[i - 1]->peso]) > valor(matriz[i - 1][cap])) {
 				vector<Item*> temp = matriz[i - 1][cap - itens[i - 1]->peso];
 				temp.push_back(itens[i - 1]);
 				matriz[i][cap] = temp;
 
 			}
-			else {
+			else if(i != 0 && cap != 0){
 				matriz[i][cap] = matriz[i - 1][cap];
 			}
 		}
