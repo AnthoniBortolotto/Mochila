@@ -59,7 +59,7 @@ int main()
 	if (valor(res) != 0 && peso(res) != 0) {
 		for (int i = 0; i < res.size(); i++)
 		{
-			//ignora o vazio
+			//ignora os vazio
 			if (res[i]->valor != 0 && res[i]->peso != 0) {
 				cout << "-------------------------------------\n";
 				cout << "nome: " << res[i]->nome << endl;
