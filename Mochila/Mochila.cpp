@@ -27,7 +27,7 @@ int valor(vector<Item*> itens);
 int valorMaximo(int* valores, int* pesos, int maxCap, int numeroItens);
 vector<Item*> resolver(vector<Item*> itens, int maxCap);
 int peso(vector<Item*> itens);
-
+vector<vector<vector<Item*>>> inicializarMatriz(vector<vector<vector<Item*>>> matriz, int tam, int cap);
 
 int main()
 {
@@ -130,13 +130,11 @@ int valorMaximo(int* valores, int* pesos, int maxCap, int numeroItens) {
 	return matriz[numeroItens][maxCap];
 }
 
-vector<Item*> resolver(vector<Item*> itens, int maxCap) {
-	vector<vector<vector<Item*>>> matriz;
-	//inicializa a matriz
-	for (int i = 0; i < itens.size() + 1; i++)
+vector<vector<vector<Item*>>> inicializarMatriz(vector<vector<vector<Item*>>> matriz, int tam, int cap) {
+	for (int i = 0; i < tam + 1; i++)
 	{
 		vector<vector<Item*>> myvector;
-		for (int j = 0; j < maxCap + 1; j++)
+		for (int j = 0; j < cap + 1; j++)
 		{
 			vector<Item*> tempVal;
 			tempVal.push_back(new Item());
@@ -144,6 +142,13 @@ vector<Item*> resolver(vector<Item*> itens, int maxCap) {
 		}
 		matriz.push_back(myvector);
 	}
+	return matriz;
+}
+
+vector<Item*> resolver(vector<Item*> itens, int maxCap) {
+	//inicializa
+	vector<vector<vector<Item*>>> matriz = inicializarMatriz(matriz, itens.size(), maxCap);
+	
 	for (int i = 0; i < itens.size() + 1; i++) {
 		for (int cap = 0; cap < maxCap + 1; cap++) {
 			if (i != 0 && cap != 0 && itens[i - 1]->peso <= cap && itens[i - 1]->valor + valor(matriz[i - 1][cap - itens[i - 1]->peso]) > valor(matriz[i - 1][cap])) {
