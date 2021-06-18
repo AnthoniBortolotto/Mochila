@@ -147,7 +147,8 @@ vector<vector<vector<Item*>>> inicializarMatriz(vector<vector<vector<Item*>>> ma
 
 vector<Item*> resolver(vector<Item*> itens, int maxCap) {
 	//inicializa
-	vector<vector<vector<Item*>>> matriz = inicializarMatriz(matriz, itens.size(), maxCap);
+	vector<vector<vector<Item*>>> matriz;
+	matriz = inicializarMatriz(matriz, itens.size(), maxCap);
 	
 	for (int i = 0; i < itens.size() + 1; i++) {
 		for (int cap = 0; cap < maxCap + 1; cap++) {
